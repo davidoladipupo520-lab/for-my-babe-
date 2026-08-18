@@ -1,208 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For My Babe ❤️</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);
-      font-family: 'Georgia', serif;
-      overflow-x: hidden;
-    }
+<title>For My Love ❤️</title>
 
-    .container {
-      text-align: center;
-      max-width: 600px;
-      padding: 20px;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    h1 {
-      color: #fff;
-      font-size: 2.2rem;
-      margin-bottom: 30px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
+body {
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3, #fad0c4);
+  color: white;
+  overflow-x: hidden;
+}
 
-    .btn {
-      background: #ff4d6d;
-      color: white;
-      border: none;
-      padding: 16px 40px;
-      font-size: 1.3rem;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
-      transition: all 0.3s ease;
-      font-family: inherit;
-    }
+/* Floating hearts */
+#hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    .btn:hover {
-      transform: scale(1.05);
-      background: #ff2e55;
-    }
+.heart {
+  position: absolute;
+  bottom: -50px;
+  animation: floatUp linear forwards;
+  opacity: 0.8;
+}
 
-    .content {
-      display: none;
-      opacity: 0;
-      transition: opacity 1.2s ease;
-      margin-top: 40px;
-    }
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
 
-    .content.show {
-      display: block;
-      opacity: 1;
-    }
+  20% {
+    opacity: 0.8;
+  }
 
-    .photo {
-      width: 100%;
-      max-width: 320px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-      margin-bottom: 30px;
-      border: 6px solid white;
-    }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-    .letter {
-      background: white;
-      padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      text-align: left;
-      line-height: 1.7;
-      color: #333;
-      position: relative;
-    }
+/* Main container */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+  margin: auto;
+  padding: 45px 20px;
+  text-align: center;
+}
 
-    .letter::before {
-      content: "💌";
-      position: absolute;
-      top: -20px;
-      left: 20px;
-      font-size: 2rem;
-    }
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
 
-    .letter p {
-      margin-bottom: 16px;
-    }
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
 
-    .signature {
-      text-align: right;
-      font-style: italic;
-      margin-top: 25px;
-      color: #ff4d6d;
-      font-size: 1.15rem;
-    }
+/* Main button */
+.btn {
+  background: #ff1744;
+  color: white;
+  border: none;
+  padding: 16px 35px;
+  border-radius: 50px;
+  font-size: 1.15rem;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  margin: 10px;
+}
 
-    .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: -1;
-    }
+.btn:hover {
+  transform: scale(1.07);
+}
 
-    .heart {
-      position: absolute;
-      font-size: 20px;
-      animation: float 6s linear infinite;
-      opacity: 0.7;
-    }
+/* Typing message */
+#loveMessage {
+  display: none;
+  margin: 30px 0;
+  font-size: 2rem;
+  font-weight: bold;
+  min-height: 70px;
+  text-shadow: 0 3px 15px rgba(0,0,0,0.2);
+}
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-  </style>
+/* Content */
+.content {
+  display: none;
+  animation: appear 1.5s ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* YOUR PHOTO */
+.main-photo {
+  width: 100%;
+  max-width: 390px;
+  height: auto;
+  display: block;
+  margin: 25px auto 30px;
+  border-radius: 25px;
+  border: 6px solid white;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* Love letter */
+.letter {
+  background: rgba(255,255,255,0.97);
+  color: #333;
+  padding: 30px 25px;
+  border-radius: 22px;
+  text-align: left;
+  line-height: 1.8;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.letter h2 {
+  text-align: center;
+  color: #ff1744;
+  margin-bottom: 20px;
+}
+
+.letter p {
+  margin-bottom: 18px;
+}
+
+.signature {
+  text-align: right;
+  color: #ff1744;
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+/* Big love */
+.big-love {
+  margin-top: 40px;
+  font-size: 3rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Music button */
+.music-button {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: #ff1744;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  #loveMessage {
+    font-size: 1.7rem;
+  }
+
+  .letter {
+    padding: 25px 20px;
+  }
+
+  .big-love {
+    font-size: 2.3rem;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="hearts" id="hearts"></div>
+<!-- Floating hearts -->
+<div id="hearts"></div>
 
-  <div class="container">
-    <h1>Something special for you 💕</h1>
-    
-    <button class="btn" id="revealBtn">Click me, my love</button>
+<!-- Music -->
+<button class="music-button" onclick="toggleMusic()" id="musicBtn">
+🎵
+</button>
 
-    <div class="content" id="content">
-      <!-- Replace the image source with your own photo -->
-      <img 
-        src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80" 
-        alt="Us" 
-        class="photo"
-      >
+<audio id="music" loop>
+  <source src="love-song.mp3" type="audio/mpeg">
+</audio>
 
-      <div class="letter">
-        <p>My dearest,</p>
-        
-        <p>
-          Every time I look at you, the world feels a little softer and a lot brighter. 
-          You are my favorite hello and my hardest goodbye. 
-          In a world full of ordinary days, you make mine extraordinary.
-        </p>
-        
-        <p>
-          Thank you for being the reason I smile for no reason, 
-          the calm in my chaos, and the home I never knew I needed.
-        </p>
-        
-        <p>
-          I love you more than words can hold — but I hope these ones come close.
-        </p>
-        
-        <div class="signature">
-          Forever yours,<br>
-          [Your Name]
-        </div>
+
+<div class="container">
+
+  <h1>Something Special For You 💕</h1>
+
+  <p class="subtitle">
+    I made this little surprise just for you ❤️
+  </p>
+
+  <button class="btn" id="revealBtn" onclick="revealLove()">
+    Click me, my love 💌
+  </button>
+
+
+  <!-- Typing message -->
+  <div id="loveMessage"></div>
+
+
+  <!-- Hidden content -->
+  <div class="content" id="content">
+
+    <!-- YOUR UPLOADED PHOTO -->
+    <img
+      src="my-love.jpeg"
+      alt="My Love ❤️"
+      class="main-photo"
+    >
+
+
+    <!-- LOVE LETTER -->
+    <div class="letter">
+
+      <h2>💌 My Dearest Love</h2>
+
+      <p>
+        Every time I look at you, I find another reason to smile.
+        You have a way of making even the simplest moments feel
+        incredibly special.
+      </p>
+
+      <p>
+        You are my favorite hello, my hardest goodbye,
+        and one of the most beautiful parts of my life.
+      </p>
+
+      <p>
+        Thank you for every smile, every conversation,
+        every memory, and every little moment that brings
+        us closer together.
+      </p>
+
+      <p>
+        If I could give you one thing in life, I would give you
+        the ability to see yourself through my eyes.
+        Then you would understand just how special you are to me.
+      </p>
+
+      <p>
+        No matter how many miles separate us,
+        you will always have a special place in my heart. ❤️
+      </p>
+
+      <div class="signature">
+        Forever yours,<br>
+        <strong>Your Love ❤️</strong>
       </div>
+
     </div>
+
+
+    <div class="big-love">
+      I LOVE YOU ❤️
+    </div>
+
+
+    <button class="btn" onclick="location.reload()">
+      Experience It Again 💕
+    </button>
+
   </div>
 
-  <script>
-    const btn = document.getElementById('revealBtn');
-    const content = document.getElementById('content');
-    const heartsContainer = document.getElementById('hearts');
+</div>
 
-    btn.addEventListener('click', () => {
-      content.classList.add('show');
-      btn.style.display = 'none';
-      createHearts();
+
+<script>
+
+/* Floating hearts */
+
+function createHeart() {
+
+  const heart = document.createElement("div");
+
+  heart.className = "heart";
+
+  const symbols = [
+    "❤️",
+    "💕",
+    "💗",
+    "💖",
+    "💘",
+    "💝"
+  ];
+
+  heart.innerHTML =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  heart.style.left =
+    Math.random() * 100 + "vw";
+
+  heart.style.fontSize =
+    (15 + Math.random() * 30) + "px";
+
+  heart.style.animationDuration =
+    (5 + Math.random() * 6) + "s";
+
+  document
+    .getElementById("hearts")
+    .appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 11000);
+}
+
+setInterval(createHeart, 450);
+
+
+/* Reveal the surprise */
+
+function revealLove() {
+
+  const button =
+    document.getElementById("revealBtn");
+
+  const message =
+    document.getElementById("loveMessage");
+
+  const content =
+    document.getElementById("content");
+
+  button.style.display = "none";
+
+  message.style.display = "block";
+
+  const text =
+    "You are my favorite person in this world ❤️";
+
+  let i = 0;
+
+  function typeWriter() {
+
+    if (i < text.length) {
+
+      message.innerHTML += text.charAt(i);
+
+      i++;
+
+      setTimeout(typeWriter, 65);
+
+    } else {
+
+      setTimeout(() => {
+
+        content.style.display = "block";
+
+        heartExplosion();
+
+      }, 700);
+    }
+  }
+
+  typeWriter();
+
+  /* Start music after button click */
+  const music =
+    document.getElementById("music");
+
+  music.play().catch(() => {});
+
+}
+
+
+/* Heart explosion */
+
+function heartExplosion() {
+
+  for (let i = 0; i < 40; i++) {
+
+    setTimeout(() => {
+
+      createHeart();
+
+    }, i * 80);
+
+  }
+
+}
+
+
+/* Music */
+
+let musicPlaying = false;
+
+function toggleMusic() {
+
+  const music =
+    document.getElementById("music");
+
+  const button =
+    document.getElementById("musicBtn");
+
+  if (musicPlaying) {
+
+    music.pause();
+
+    button.innerHTML = "🎵";
+
+    musicPlaying = false;
+
+  } else {
+
+    music.play().then(() => {
+
+      button.innerHTML = "⏸️";
+
+      musicPlaying = true;
+
+    }).catch(() => {
+
+      alert(
+        "Please add your love-song.mp3 file first ❤️"
+      );
+
     });
 
-    function createHearts() {
-      for (let i = 0; i < 25; i++) {
-        setTimeout(() => {
-          const heart = document.createElement('div');
-          heart.classList.add('heart');
-          heart.innerHTML = '❤️';
-          heart.style.left = Math.random() * 100 + 'vw';
-          heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-          heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-          heartsContainer.appendChild(heart);
+  }
 
-          setTimeout(() => heart.remove(), 7000);
-        }, i * 150);
-      }
-    }
-  </script>
+}
+
+</script>
+
 </body>
 </html>
